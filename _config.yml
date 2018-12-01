@@ -1,1 +1,6 @@
 theme: jekyll-theme-cayman
+defaults:
+  - scope:
+      path: "static/img"
+    values:
+      image: true
