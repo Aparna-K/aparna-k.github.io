@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Datascope  | Covariance, Eigen Vectors and Principal Components - PCA Part 1/3</title>
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="generator" content="Hugo 0.40.3" />
+    
+    
+      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    
+
+    
+    
+      <link href="http://aparna-k.com/dist/css/app.ab4b67a3ea25990fa8279f3b7ef08b61.css" rel="stylesheet">
+    
+
+    
+
+    
+      
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+
+    
+
+    
+
+    <meta property="og:title" content="Covariance, Eigen Vectors and Principal Components - PCA Part 1/3" />
+<meta property="og:description" content="Covariance matrix: Here is a really good reference to build an intuition for covariance matrix
+Also known as the variance-covariance matrix, holds information about how two random variables (in this case two features) vary with respect to one another
+Covariance is a measure of how much two random variables vary together. It’s similar to variance, but where variance tells you how a single variable varies, co variance tells you how two variables vary together." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://aparna-k.com/posts/covariance_eigen_pca/" />
+
+
+
+<meta property="article:published_time" content="2017-03-10T19:59:42&#43;05:30"/>
+
+<meta property="article:modified_time" content="2017-03-10T19:59:42&#43;05:30"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta itemprop="name" content="Covariance, Eigen Vectors and Principal Components - PCA Part 1/3">
+<meta itemprop="description" content="Covariance matrix: Here is a really good reference to build an intuition for covariance matrix
+Also known as the variance-covariance matrix, holds information about how two random variables (in this case two features) vary with respect to one another
+Covariance is a measure of how much two random variables vary together. It’s similar to variance, but where variance tells you how a single variable varies, co variance tells you how two variables vary together.">
+
+
+<meta itemprop="datePublished" content="2017-03-10T19:59:42&#43;05:30" />
+<meta itemprop="dateModified" content="2017-03-10T19:59:42&#43;05:30" />
+<meta itemprop="wordCount" content="579">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Covariance, Eigen Vectors and Principal Components - PCA Part 1/3"/>
+<meta name="twitter:description" content="Covariance matrix: Here is a really good reference to build an intuition for covariance matrix
+Also known as the variance-covariance matrix, holds information about how two random variables (in this case two features) vary with respect to one another
+Covariance is a measure of how much two random variables vary together. It’s similar to variance, but where variance tells you how a single variable varies, co variance tells you how two variables vary together."/>
+
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="http://aparna-k.com/" class="f3 fw2 hover-white no-underline white-90 dib">
+      Datascope
+    </a>
+    <div class="flex-l items-center">
+      
+      
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  <article class="flex-l flex-wrap justify-between mw8 center">
+
+    <header class="mt4 w-100">
+      <p class="f6 b helvetica tracked">
+          
+        POSTS
+      </p>
+      <h1 class="f1 athelas mb1">Covariance, Eigen Vectors and Principal Components - PCA Part 1/3</h1>
+      
+      <time class="f6 mv4 dib tracked" datetime="2017-03-10T19:59:42&#43;05:30">March 10, 2017</time>
+    </header>
+
+    <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l">
+
+<h2 id="covariance-matrix">Covariance matrix:</h2>
+
+<p><a href="http://www.visiondummy.com/2014/04/geometric-interpretation-covariance-matrix/">Here is a really good reference</a> to build an intuition for covariance matrix</p>
+
+<p>Also known as the variance-covariance matrix, holds information about how two random variables (in this case two features) vary with respect to one another</p>
+
+<p>Covariance is a measure of how much two random variables vary together. It’s similar to variance, but where variance tells you how a single variable varies, co variance tells you how two variables vary together.</p>
+
+<p><a href="http://www.statisticshowto.com/covariance/"><img class="special-img-class" style="max-width:400px; max-height:450px" src="/img/pca/covariance.png"/></a></p>
+
+<p>A covariance matrix summarizes the co-variances of a set of variables in a matrix</p>
+
+<p><a href="http://www.visiondummy.com/2014/04/geometric-interpretation-covariance-matrix/"><img class="special-img-class" style="max-width:400px; max-height:450px" src="/img/pca/covariance_matrix_formula.png" /></a></p>
+
+<p>Where,</p>
+
+<p><a href="http://www.visiondummy.com/2014/04/geometric-interpretation-covariance-matrix/"><img class="special-img-class" style="max-width:400px; max-height:450px" src="/img/pca/covariance_formula.png" /></a></p>
+
+<p>The operator <strong>E</strong> is the mean (expected value) of it&rsquo;s argument</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Covariance_matrix"><img class="special-img-class" style="max-width:400px; max-height:450px" src="/img/pca/mean.png" /></a></p>
+
+<h5 id="shape-of-covariance-matrix">Shape of covariance matrix:</h5>
+
+<p>The following figure illustrates the shape of data and their corresponding covariance matrix</p>
+
+<p><a href="http://www.visiondummy.com/2014/04/geometric-interpretation-covariance-matrix/"><img class="special-img-class" src="/img/pca/shape_of_covariance.png" /></a></p>
+
+<p>Understanding the shape:</p>
+
+<p><em>Top-Left</em>:</p>
+
+<p>&sigma;(x, x) = 5 -&gt; Variance of x w.r.t itself, i.e., variance of x <br>
+&sigma;(x, y) = 4 -&gt; Variance of x w.r.t y <br>
+&sigma;(y, x) = 4 -&gt; Variance of y w.r.t x <br>
+&sigma;(y, y) = 6 -&gt; Variance of y w.r.t itself, i.e., variance of y <br></p>
+
+<p>This implies that x, y have a positive covariance, i.e., x increases as y increases</p>
+
+<p><em>Top-Right</em>:</p>
+
+<p>&sigma;(x, x) = 5 -&gt; Variance of x w.r.t itself, i.e., variance of x <br>
+&sigma;(x, y) = -4 -&gt; Variance of x w.r.t y <br>
+&sigma;(y, x) = -4 -&gt; Variance of y w.r.t x <br>
+&sigma;(y, y) = 6 -&gt; Variance of y w.r.t itself, i.e., variance of y <br></p>
+
+<p>This implies that x, y have a negative covariance, i.e., x decreases as y increases and vice-versa</p>
+
+<p><em>Bottom-Left</em>:</p>
+
+<p>&sigma;(x, x) = 5 -&gt; Variance of x w.r.t itself, i.e., variance of x <br>
+&sigma;(x, y) = 0 -&gt; Variance of x w.r.t y <br>
+&sigma;(y, x) = 0 -&gt; Variance of y w.r.t x <br>
+&sigma;(y, y) = 1 -&gt; Variance of y w.r.t itself, i.e., variance of y <br></p>
+
+<p>This implies that x, y have a zero covariance, i.e., x and y have no relationship. Also the variance of x is much higher than y giving the shape that we see where the data is spread out maximally in the x direction</p>
+
+<p><em>Bottom-Right</em>:</p>
+
+<p>&sigma;(x, x) = 1 -&gt; Variance of x w.r.t itself, i.e., variance of x <br>
+&sigma;(x, y) = 0 -&gt; Variance of x w.r.t y <br>
+&sigma;(y, x) = 0 -&gt; Variance of y w.r.t x <br>
+&sigma;(y, y) = 5 -&gt; Variance of y w.r.t itself, i.e., variance of y <br></p>
+
+<p>This implies that x, y have a zero covariance, i.e., x and y have no relationship. Also the variance of y is much higher than x giving the shape that we see where the data is spread out maximally in the y direction</p>
+
+<h3 id="eigenvectors-of-covariance-matrix">Eigenvectors of Covariance matrix:</h3>
+
+<p>I highly recommend watching this <a href="https://www.youtube.com/watch?v=PFDu9oVAE-g">video</a> to get an intuition about eigen vectors</p>
+
+<p>Eigen vectors are special vectors for a given matrix, which when multiplied by the matrix do not change their <a href="https://www.youtube.com/watch?v=k7RM-ot2NWY">span</a> but change their scale or magnitude</p>
+
+<p>Eigenvalues is the scale by which an eigenvector changes when multiplied by a given matrix.</p>
+
+<p>In other words, for an eigen vector of a matrix, multiplying the vector with the matrix is the same as multiplying the vector with a scalar. The scalar being the eigen value</p>
+
+<p>This equation can be represented as:</p>
+
+<p><a href="http://www.visiondummy.com/2014/04/geometric-interpretation-covariance-matrix/"><img class="special-img-class" src="/img/pca/eigen_vector_formula.png" /></a></p>
+
+<blockquote>
+<p><strong>Property</strong>: For a covariance matrix, the Eigenvector with the largest Eigenvalue points in the direction of maximal variance</p>
+</blockquote>
+
+<p>Eigenvectors and eigenvalues for the covariance matrices described above</p>
+
+<p><a href="http://www.visiondummy.com/2014/04/geometric-interpretation-covariance-matrix/"><img class="special-img-class" src="/img/pca/eigen_vectors_cov_matrix2.png" /></a></p>
+
+<p><a href="http://www.visiondummy.com/2014/04/geometric-interpretation-covariance-matrix/"><img class="special-img-class" src="/img/pca/eigen_vectors_cov_matrix1.png" /></a></p>
+
+<blockquote>
+<p>Given a set of eigen vectors for the covariance matrix, the principal components are the eigen vectors with the largets eigen values</p>
+</blockquote>
+<ul class="pa0">
+  
+</ul>
+<div class="mt6">
+        
+      </div>
+    </main>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-near-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://aparna-k.com/" >
+    &copy; 2018 Datascope
+  </a>
+  
+
+
+
+
+
+
+
+
+  </div>
+</footer>
+
+    
+
+  <script src="http://aparna-k.com/dist/js/app.3fc0f988d21662902933.js"></script>
+
+
+  </body>
+</html>
