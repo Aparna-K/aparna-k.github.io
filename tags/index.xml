@@ -2,12 +2,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Datascope</title>
-    <link>http://aparna-k.com/tags/</link>
+    <link>https://aparna-k.com/tags/</link>
     <description>Recent content in Tags on Datascope</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     
-	<atom:link href="http://aparna-k.com/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://aparna-k.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
   </channel>
