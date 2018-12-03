@@ -6,10 +6,21 @@
     <description>Recent content on Datascope</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 12 Mar 2017 17:32:42 +0530</lastBuildDate>
+    <lastBuildDate>Sat, 01 Dec 2018 19:02:42 +0530</lastBuildDate>
     
 	<atom:link href="https://aparna-k.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>The idea of Information Entropy</title>
+      <link>https://aparna-k.com/posts/informationtheoryentropy/information_entropy/</link>
+      <pubDate>Sat, 01 Dec 2018 19:02:42 +0530</pubDate>
+      
+      <guid>https://aparna-k.com/posts/informationtheoryentropy/information_entropy/</guid>
+      <description>Information Entropy  Information entropy quantifies how much information there is in an event.
+ Information - Intuition Let&amp;rsquo;s consider the following three sentences
+ Tomorrow, the sun will rise from the East The phone will ring in the next one hour It will snow in Mumbai this winter  When we consider the amount of information in the three sentences above, there are two ways to think about it.</description>
+    </item>
     
     <item>
       <title>PCA on MNIST using SKLearn - PCA Part 3/3</title>
