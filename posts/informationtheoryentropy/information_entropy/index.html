@@ -22,13 +22,15 @@
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="The idea of Information Entropy"/>
-<meta name="twitter:description" content="Information Entropy  Information entropy quantifies how much information there is in an event.
- Information - Intuition Let&rsquo;s consider the following three sentences
+<meta name="twitter:description" content="Information Entropy  Information entropy quantifies the average amount of information in an event.
+ We could also think of entropy as a measure of unpredictability.
+Information - Intuition Let&rsquo;s consider the following three sentences
  Tomorrow, the sun will rise from the East The phone will ring in the next one hour It will snow in Mumbai this winter  When we consider the amount of information in the three sentences above, there are two ways to think about it."/>
 
 <meta property="og:title" content="The idea of Information Entropy" />
-<meta property="og:description" content="Information Entropy  Information entropy quantifies how much information there is in an event.
- Information - Intuition Let&rsquo;s consider the following three sentences
+<meta property="og:description" content="Information Entropy  Information entropy quantifies the average amount of information in an event.
+ We could also think of entropy as a measure of unpredictability.
+Information - Intuition Let&rsquo;s consider the following three sentences
  Tomorrow, the sun will rise from the East The phone will ring in the next one hour It will snow in Mumbai this winter  When we consider the amount of information in the three sentences above, there are two ways to think about it." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://aparna-k.com/posts/informationtheoryentropy/information_entropy/" /><meta property="article:published_time" content="2018-12-01T19:02:42&#43;05:30"/>
@@ -158,7 +160,7 @@
     
     
     <br/>
-    <i class="fas fa-clock"></i> 2 min read
+    <i class="fas fa-clock"></i> 3 min read
 </div>
 
 
@@ -171,8 +173,10 @@
 <h2 id="information-entropy">Information Entropy</h2>
 
 <blockquote>
-<p>Information entropy quantifies how much information there is in an event.</p>
+<p>Information entropy quantifies the average amount of information in an event.</p>
 </blockquote>
+
+<p>We could also think of entropy as a measure of <em>unpredictability</em>.</p>
 
 <h3 id="information-intuition">Information - Intuition</h3>
 
@@ -236,10 +240,53 @@
 <p>Representation of Entropy $H(X)$</p>
 
 <blockquote>
-<p>$H(X) = -\sum_{x \in X} p(x)\log(p(x))$</p>
+<p>$H(X) = -\sum_{x \in X} p(x)\log_2(p(x))$</p>
 </blockquote>
 
 <p>Or, in other words, this is the <em>mean</em> or <em>expectation</em> of Information</p>
+
+<h4 id="intuition">Intuition</h4>
+
+<p>Let&rsquo;s go back to the <em>plain English</em> definition of Entropy, i.e., &ldquo;Entropy is a measure of <em>unpredictability</em>.&rdquo;</p>
+
+<p>An intuition for why this is true can be achieved by the following graph</p>
+
+<p><img class="special-img-class" style="max-width:400px; max-height:450px" src="/img/information_entropy/Binary_entropy_plot.svg"/></p>
+
+<p>This is the graph for entropy for random variable $X$ with two possible outcomes.</p>
+
+<p>Like, a coin toss, where we only have two states</p>
+
+<p>Say, we represent this as follows:</p>
+
+<blockquote>
+<p>$X = {1,\ if\ Head = True; 0\ if Head = False}$</p>
+</blockquote>
+
+<ul>
+<li><p>If the coin is rigged,  and we know that a toss <strong><em>always</em></strong> results in a <em>head</em>, i.e., the probability $p(X = 1) = 1$</p></li>
+
+<li><p>Also, $p(X = 0) = 0$</p></li>
+</ul>
+
+<p>Intuitively, if we already know this information, that the coin is rigged, there is <em>no uncertainity</em>, which means the entropy is 0</p>
+
+<blockquote>
+<p>$H(X) = - [ 1 \times \log_2(1) + 0 \times \log_2(0)] = 0$</p>
+</blockquote>
+
+<p>If we had a fair coin, we have an equal chance of any result, i.e,</p>
+
+<p>$P(X = 1) = 0.5$
+$P(X = 0) = 0.5$</p>
+
+<p>Then,</p>
+
+<blockquote>
+<p>$H(X) = - [ 0.5 \times \log_2(0.5) + 0.5 \times \log_2(0.5)] = 1$</p>
+</blockquote>
+
+<p>This is the <strong>highest possible value for entropy</strong> for this system, in other words, <em>anything can happen with equal probability</em></p>
 
 <h3 id="references">References:</h3>
 
