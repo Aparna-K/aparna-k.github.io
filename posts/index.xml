@@ -6,10 +6,20 @@
     <description>Recent content in Posts on Datascope</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 01 Dec 2018 19:02:42 +0530</lastBuildDate>
+    <lastBuildDate>Tue, 04 Dec 2018 19:02:00 +0530</lastBuildDate>
     
 	<atom:link href="https://aparna-k.com/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Maximum Entropy Model - Intuition (Part 1/2)</title>
+      <link>https://aparna-k.com/posts/maxentmodelling/maxent/</link>
+      <pubDate>Tue, 04 Dec 2018 19:02:00 +0530</pubDate>
+      
+      <guid>https://aparna-k.com/posts/maxentmodelling/maxent/</guid>
+      <description>Principle of Maximum Entropy  &amp;ldquo;In making inferences on the basis of partial information we must use that probability distribution which has maximum entropy subject to whatever is known. This is the only unbiased assignment we can make; to use any other would amount to arbitrary assumption of information which,by hypothesis, we do not have&amp;rdquo; - [Jaynes, 1957]
+ If you are unfamiliar with the term information entropy, refer to my previous post</description>
+    </item>
     
     <item>
       <title>The idea of Information Entropy</title>
