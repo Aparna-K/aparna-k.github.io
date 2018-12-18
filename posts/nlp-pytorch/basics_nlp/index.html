@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    
+    
+
+
+    <head>
+    <link href="https://gmpg.org/xfn/11" rel="profile">
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Cache-Control" content="public" />
+<!-- Enable responsiveness on mobile devices -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="generator" content="Hugo 0.52" />
+
+    
+    
+    
+
+<title>NLP - Feature representation • Datascope</title>
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="NLP - Feature representation"/>
+<meta name="twitter:description" content="To build models for NLP, we first have to represent words and sentences as something that an algorithm can understand - i.e., numbers
+There are many ways of representing textual information as numeric features. Below are a few of the basic ones.
+One-hot representation Say, we presume that most of the words in our corpus comes from a pre-defined set of words.
+We start with a zero-vector the same length as our vocabulary list and if a word occurs at least once in a document, we change the value of the vector-index corresponding to the word to 1"/>
+
+<meta property="og:title" content="NLP - Feature representation" />
+<meta property="og:description" content="To build models for NLP, we first have to represent words and sentences as something that an algorithm can understand - i.e., numbers
+There are many ways of representing textual information as numeric features. Below are a few of the basic ones.
+One-hot representation Say, we presume that most of the words in our corpus comes from a pre-defined set of words.
+We start with a zero-vector the same length as our vocabulary list and if a word occurs at least once in a document, we change the value of the vector-index corresponding to the word to 1" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://aparna-k.com/posts/nlp-pytorch/basics_nlp/" /><meta property="article:published_time" content="2018-12-17T19:02:00&#43;05:30"/>
+<meta property="article:modified_time" content="2018-12-17T19:02:00&#43;05:30"/>
+
+
+    
+
+
+
+
+
+
+<link rel="stylesheet" href="/scss/hyde-hyde.7edd83059122cd386342a3b1c68b1e7b1b05b9634400072d2221148b98ef3449.css" integrity="sha256-ft2DBZEizThjQqOxxoseexsFuWNEAActIiEUi5jvNEk=">
+
+
+<link rel="stylesheet" href="/scss/print.2744dcbf8a0b2e74f8a50e4b34e5f441be7cf93cc7de27029121c6a09f9e77bc.css" integrity="sha256-J0Tcv4oLLnT4pQ5LNOX0Qb58&#43;TzH3icCkSHGoJ&#43;ed7w=" media="print">
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href=favicon.ico>
+    
+
+    <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+</head>
+
+
+    <body class=" ">
+    
+<div class="sidebar">
+  <div class="container ">
+    <div class="sidebar-about">
+      <span class="site__title">
+        <a href="https://aparna-k.com/">Datascope</a>
+      </span>
+      
+      
+      <p class="site__description">
+         Prediction is risky, especially when it involves the future. - Niels Bohr 
+      </p>
+    </div>
+    <div class="collapsible-menu">
+      <input type="checkbox" id="menuToggle">
+      <label for="menuToggle">Datascope</label>
+      <div class="menu-content">
+        <div>
+	<ul class="sidebar-nav">
+		 
+		
+		</li>
+	</ul>
+</div>
+
+        <section class="social">
+	
+	
+	
+	
+	
+	
+	
+	<a href="https://linkedin.com/in/aparnakorattyswaroopam" rel="me"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	
+	
+	
+	
+	
+</section>
+
+      </div>
+    </div>
+    <div class="copyright">
+  2017
+</div>
+
+  </div>
+</div>
+
+        <div class="content container">
+            
+    <article>
+  <header>
+    <h1>NLP - Feature representation</h1>
+    
+    
+<div class="post__meta">
+    
+    
+      <i class="fas fa-calendar-alt"></i> Dec 17, 2018
+    
+    
+    
+    
+    
+    <br/>
+    <i class="fas fa-clock"></i> 3 min read
+</div>
+
+
+  </header>
+  
+  
+  <div class="post">
+    
+
+<p>To build models for NLP, we first have to represent words and sentences as something that an algorithm can understand - i.e., numbers</p>
+
+<p>There are many ways of representing textual information as numeric features. Below are a few of the basic ones.</p>
+
+<h3 id="one-hot-representation">One-hot representation</h3>
+
+<p>Say, we presume that most of the words in our corpus comes from a pre-defined set of words.</p>
+
+<p>We start with a zero-vector the same length as our vocabulary list and if a word occurs at least once in a document, we change the value of the vector-index corresponding to the word to 1</p>
+
+<p>Ex:
+Consider the following two sentences</p>
+
+<blockquote>
+<p>Time flies like an arrow
+Fruit flies like a banana</p>
+</blockquote>
+
+<p>We can tokenize the sentences to form a word vector like below. To do this we drop all punctuation and convert all words to lower case</p>
+
+<blockquote>
+<p>[ time | flies | like | an | arrow | fruit | a | banana ]</p>
+</blockquote>
+
+<p>The 1-hot encoding for &ldquo;like a banana&rdquo; would be</p>
+
+<blockquote>
+<p>[ 0 | 0 | 1 | 0 | 0 | 0 | 1 | 1 ]</p>
+</blockquote>
+
+<p>Example:</p>
+
+<blockquote>
+<pre><code class="language-python">from sklearn.feature_extraction.text import CountVectorizer
+
+corpus = [
+            'Time flies like an arrow',
+            'Fruit flies like a banana'
+         ]
+
+one_hot_vectorizer = CountVectorizer(binary=True)
+
+one_hot = one_hot_vectorizer.fit_transform(corpus).toarray()
+</code></pre>
+
+<pre><code class="language-python">print(one_hot)
+</code></pre>
+</blockquote>
+
+<p><p style='color: green'>
+[[1 1 0 1 0 1 1]<br/>
+  [0 0 1 1 1 1 0]]
+<p/></p>
+
+<blockquote>
+<pre><code class="language-python">print(one_hot_vectorizer.get_feature_names())
+</code></pre>
+</blockquote>
+
+<p><p style='color: green'>
+[&lsquo;an&rsquo;, &lsquo;arrow&rsquo;, &lsquo;banana&rsquo;, &lsquo;flies&rsquo;, &lsquo;fruit&rsquo;, &lsquo;like&rsquo;, &lsquo;time&rsquo;]
+<p/></p>
+
+<blockquote>
+<pre><code class="language-python"># Visualize the one hot vector
+import seaborn as sns
+import matplotlib.pyplot as plt
+sns.heatmap(one_hot, annot=True,
+            cbar=False, xticklabels=one_hot_vectorizer.vocabulary_,
+            yticklabels=['Sentence 1', 'Sentence 2'])
+plt.show()
+</code></pre>
+</blockquote>
+
+<p><img src="/img/nlp-pytorch/one-hot.png" alt="png" /></p>
+
+<h3 id="tf-representation">TF representation</h3>
+
+<p>TF - Term frequency</p>
+
+<p>This is simply the number of times a term occurs in a document</p>
+
+<p>Example, say our document is just the sentence, &lsquo;Time flies like an arrow and fruit flies like a banana&rsquo;</p>
+
+<p>The TF representation for this sentence is</p>
+
+<blockquote>
+<pre><code>{
+  time: 1
+  flies: 2
+  like: 2
+  an: 1
+  arrow: 1
+  and: 1
+  fruit: 1
+  a: 1
+  banana: 1
+}
+</code></pre>
+</blockquote>
+
+<p>Example</p>
+
+<blockquote>
+<pre><code class="language-python">from sklearn.feature_extraction.text import CountVectorizer
+
+corpus = [
+            'Time flies like an arrow',
+            'Fruit flies like a banana'
+         ]
+
+count_vectorizer = CountVectorizer()
+tf = count_vectorizer.fit_transform(corpus).toarray()
+
+print(count_vectorizer.get_feature_names())
+print(tf)
+</code></pre>
+</blockquote>
+
+<p><p style='color: green'>
+[&lsquo;an&rsquo;, &lsquo;arrow&rsquo;, &lsquo;banana&rsquo;, &lsquo;flies&rsquo;, &lsquo;fruit&rsquo;, &lsquo;like&rsquo;, &lsquo;time&rsquo;]<br/>
+[1 1 1 2 1 2 1]
+<p/></p>
+
+<h3 id="tf-idf-representation">TF-IDF representation</h3>
+
+<p>Consider a collection of patent documents. You would expect most of them to have words like claim, system, method, procedure, and so on, and often repeated multiple times. The TF representation weighs words that are more frequent. However, common words such as “claim” do not add anything to our understanding of a specific patent. Conversely, if a rare word such as “tetrafluoroethylene” occurs less frequently but is quite likely to be indicative of the nature of the patent document, we would want to give it a larger weight in our representation. The Inverse-Document-Frequency (IDF) is a heuristic to do exactly that.</p>
+
+<p>The IDF representation penalizes common tokens and rewards rare tokens in the vector representation. The IDF(w) of a token w is defined with respect to a corpus as</p>
+
+<p>$IDF(w) = \log\frac{N}{n_w}$</p>
+
+<p>where nw is the number of documents containing the wordw and N is the total number of documents. The TF-IDF score is simply the product TF(w) * IDF(w).</p>
+
+<p>If there is a very common word that occurs in all documents (i.e., nw = N), IDF(w) is zero and the TF-IDF score is 0, thereby completely penalizing that term. Second, if a term occurs very rarely, perhaps in only one document, the IDF will be the maximum possible value $\log N$.</p>
+
+<p>Example:</p>
+
+<blockquote>
+<pre><code class="language-python">from sklearn.feature_extraction.text import TfidfVectorizer
+
+corpus = [
+            'Time flies like an arrow',
+            'Fruit flies like a banana'
+         ]
+
+ 
+tfidf_vectorizer = TfidfVectorizer()
+tfidf = tfidf_vectorizer.fit_transform(corpus).toarray()
+sns.heatmap(tfidf, annot=True, cbar=False, xticklabels=tfidf_vectorizer.vocabulary_,
+            yticklabels= ['Sentence 1', 'Sentence 2'])
+</code></pre>
+</blockquote>
+
+<p><img src="/img/nlp-pytorch/tf-idf.png" alt="png" /></p>
+
+  </div>
+  
+
+<div class="navigation navigation-single">
+    
+    <a href="/posts/maxentmodelling/maxent-2/" class="navigation-prev">
+      <i aria-hidden="true" class="fa fa-chevron-left"></i>
+      <span class="navigation-tittle">Maximum Entropy Model - The details (Part 2/3)</span>
+    </a>
+    
+    
+</div>
+
+
+  
+
+  
+    
+
+
+</article>
+
+
+        </div>
+        
+    
+<script defer src="https://use.fontawesome.com/releases/v5.2.0/js/all.js" integrity="sha384-4oV5EgaV02iISL2ban6c/RmotsABqE4yZxZLcYMAdG7FAPsyHYAPpywE9PJo+Khy"
+  crossorigin="anonymous">
+</script>
+
+    
+    
+    <script type="text/javascript">
+        
+        hljs.initHighlightingOnLoad();
+    </script>
+    
+
+
+
+
+    
+
+
+
+    </body>
+</html>
